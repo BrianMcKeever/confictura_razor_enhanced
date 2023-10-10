@@ -1,4 +1,4 @@
-def get_least_charge_tool(item_id, color = 1):
+def get_least_charge_tool(item_id, color = 0):
     tools = Items.FindAllByID(item_id,color, Player.Backpack.Serial, 0)
     best_tool = None
     remaining_min = 99999
@@ -35,6 +35,7 @@ def get_tinker_tool(make_if_necessary = True):
         return tool
     
 def make_tinker_tool():
+    print("make tinker tool")
     tool = get_tinker_tool(False)
     if not tool:
         Misc.Beep()
@@ -112,7 +113,7 @@ def get_woodworking_tools():
         tool = get_woodworking_tools()
     return tool
     
-def makeTongs():
+def make_tongs():
 
     tool = get_tinker_tool()
     if tool:
@@ -125,7 +126,12 @@ def makeTongs():
     else:
         Misc.ScriptStopAll(True)
         
-
+def get_tongs():
+    tool = get_least_charge_tool(0x0FBB)
+    if not tool:
+        make_tongs()
+        tool = get_tongs()
+    return tool
         
 def tinker_hatchet():
     tool = get_tinker_tool()
