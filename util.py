@@ -53,7 +53,7 @@ def make_tinker_tool():
 
 def make_jointing_plane():
     tool = get_tinker_tool()
-    boards = Items.FindByID(boards_id,-1,Player.Backpack.Serial)
+    boards = Items.FindByID(0x1BD7,-1,Player.Backpack.Serial)
     if tool and boards and boards.Amount > 6 :
         print("make tool")
         Items.UseItem(tool)
@@ -83,7 +83,7 @@ def make_pen():
         
 def make_woodworking_tools():
     tool = get_tinker_tool()
-    ingots = Items.FindByID(ingots_id,-1,Player.Backpack.Serial)
+    ingots = Items.FindByID(0x1BF2,-1,Player.Backpack.Serial)
     if tool and ingots and ingots.Amount > 6 :
         print("make woodworking tools")
         Items.UseItem(tool)
