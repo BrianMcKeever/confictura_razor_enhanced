@@ -10,17 +10,30 @@ def makeTongs():
         Gumps.SendAction(949095101, 0)
     else:
         Misc.ScriptStopAll(True)
-    
+resource_container = 0x403CAD9A   
+tong_box = 0x4042D937 
+
+Items.UseItem(resource_container)
+Misc.Pause(1000)
+Items.UseItem(tong_box)
 
 while True:
     #49.6 smithing for 100% dagger crafting
-    if Player.GetSkillValue("Arms Lore") >= 100:
-    #if Player.GetSkillValue("Blacksmithing") >= 100.3:
+    if Player.GetSkillValue("Arms Lore") >= Player.GetSkillCap("Arms Lore"):
         halt
     Misc.Pause(1000)
+    ingots = Items.FindByID(0x1BF2, 0, Player.Backpack.Serial)
+    if not ingots or ingots.Amount < 50:
+        ingots = Items.FindByID(0x1BF2, 0, resource_container)
+        Items.Move(ingots, Player.Backpack, 1000)
+        Misc.Pause(1000)
     tool = Items.FindByID(0x0FBB,-1,Player.Backpack.Serial) #tongs
     if not tool:
-        makeTongs()
+        if Player.GetSkillValue("Tinkering") > 30:
+            makeTongs()
+        else:
+            tongs = Items.FindByID(0x0FBB, -1, tong_box)
+            Items.Move(tongs, Player.Backpack.Serial, 1)
         continue
     Items.UseItem(tool)
 
