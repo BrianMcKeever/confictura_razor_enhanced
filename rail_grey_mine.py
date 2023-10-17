@@ -29,6 +29,11 @@ while True:
                 Items.Move(ore, 0x405B018E, 999) #bag of holding
                 Misc.Pause(1000)
                 ore = Items.FindByID(0x19B9, -1,Player.Backpack.Serial)
+            stone = Items.FindByID(0x2158, -1,Player.Backpack.Serial)
+            while stone:
+                Items.Move(stone, 0x405B018E, 999) #bag of holding
+                Misc.Pause(1000)
+                stone = Items.FindByID(0x2158, -1,Player.Backpack.Serial)
         Misc.Pause(1000)
         if Journal.Search("no metal"):
             break
